@@ -1,14 +1,14 @@
- import pika
+import pika
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 
 ch = connection.channel()
 
-ch.queue_declare(queue='first'durable=True)
+ch.queue_declare(queue='first',durable=True)
 
 message = 'This is the first testing message.'
 
-ch.basic_publish('','first',message,properties=pika.BasicProperties(delivery_mode=2,))
+ch.basic_publish('','first',message,properties=pika.BasicProperties(delivery_mode=2,headers={'name':'amin'}))
 
 print('Message sent.')
 
